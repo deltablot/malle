@@ -13,11 +13,11 @@ jobs:
         with:
           node-version: '16.x'
           cache: 'npm'
-          access: 'public'
           registry-url: 'https://registry.npmjs.org'
       - name: Install dependencies
         run: npm ci
       - name: Publish package
-        run: npm publish
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+        uses: JS-DevTools/npm-publish@v1
+          with:
+            token: ${{ secrets.NPM_TOKEN }}
+            access: 'public'
