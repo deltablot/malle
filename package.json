@@ -1,5 +1,5 @@
 {
-  "name": "malle",
+  "name": "@deltablot/malle",
   "version": "0.1.0",
   "description": "Make text elements malleable",
   "main": "dist/main.js",
