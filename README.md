@@ -2,6 +2,10 @@
 
 Edit in place library with no dependencies and small footprint.
 
+# WARNING: ALPHA VERSION!!
+
+Api will likely change, do not use!
+
 ## Description
 
 `malle` allows you to listen to a particular event (e.g. click, hover) on an element (e.g. p, span) and transform that element into an input that will be processed by a function.
@@ -22,48 +26,39 @@ npm i malle
 yarn add malle
 ~~~
 
-## Usage
-
-See the [tests/](./tests) folder for a full example.
+## Quickstart
 
 ~~~javascript
 import { Malle } from 'malle';
 
-// this is the function that will be called once user has finished entering text (press Enter or click outside)
 const myCustomFunction = (value, event) => {
-  console.log(`New text: ${value}`);
-  // add here your code for POSTing the new value
-  // something along the line of:
-  return fetch('/ajax', {
-    method: 'POST',
-    body: JSON.stringify({ 'updateThis': value }),
-  });
 };
 
 // now create the malle
 const malle = new Malle({
-  fun: myCustomFunction,
+  // this is the function that will be called once user has finished entering text (press Enter or click outside)
+  // it receives the new value, the original element, the event and the input element
+  fun: (value, original, event, input) => {
+    console.log(`New text: ${value}`);
+    console.log(`Original element:`);
+    console.log(original);
+    // add here your code for POSTing the new value
+    // something along the line of:
+    return fetch('/ajax', {
+      method: 'POST',
+      body: JSON.stringify({ 'name': value, 'id': original.dataset.id }),
+    });
+  },
 });
 // and listen for events
 malle.listen();
 ~~~
 
-### Options
+In this example, when a user clicks on an element with `data-malleable='true'`, the function in the `fun` option will be called. The element will be replaced by a `form` containing the `input` and optionally action buttons (Submit, Cancel).
 
-When instanciating the `Malle` class, you need to give it an `Options` argument. The only required value is `fun` which is your custom function.
+See the [Documentation](./DOCUMENTATION.md) for usage and available options.
 
-Available options:
-
-| name        | type          | default value           | description                                                            | required |
-|-------------|---------------|-------------------------|------------------------------------------------------------------------|----------|
-| classes     | Array<string> | []                      | An array of classes that will be added to the input element.           | no       |
-| debug       | Boolean       | false                   | Set to true for debug messages in console.                             | no       |
-| event       | String        | click                   | The type of event to listen to.                                        | no       |
-| fun         | Function      | A rejected Promise      | A function returning a Reponse object with JSON.                       | yes      |
-| inputType   | String        | input                   | What kind of input to generate (input, textarea).                      | no       |
-| listenNow   | Boolean       | false                   | Set to true to start listening upon instanciation of the class.        | no       |
-| listenOn    | String        | [data-malleable="true"] | A javascript selector for finding elements to listen to.               | no       |
-| responseKey | String        | value                   | When reading the JSON response, what key corresponds to the new value. | no       |
+See the [tests/](./tests) folder for a full example.
 
 ## Contributing
 

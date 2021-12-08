@@ -220,7 +220,9 @@ export class Malle {
 
     // execute the before hook
     if (typeof this.opt.before === 'function') {
-      this.opt.before(this.original, event);
+      if (this.opt.before(this.original, event) !== true) {
+        return;
+      }
     }
 
     // replace malleable element with input
