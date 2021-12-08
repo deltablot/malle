@@ -58,7 +58,7 @@ In this example, when a user clicks on an element with `data-malleable='true'`, 
 
 See the [Documentation](./DOCUMENTATION.md) for usage and available options.
 
-See the [tests/](./tests) folder for a full example.
+See the [demo/](./demo) folder for a full example.
 
 ## Contributing
 
