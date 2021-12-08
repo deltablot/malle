@@ -1,0 +1,29 @@
+/**
+ * This file is part of the "malle" library
+ * Copyright 2021 Nicolas CARPi @ Deltablot
+ * License MIT
+ * https://github.com/deltablot/malle
+ */
+:root {
+    --main-bg: #f4f6f7;
+    --border: #cdcdcd;
+}
+
+body {
+    background-color: var(--main-bg);
+    padding-left: 2vw;
+}
+
+.btn {
+    margin-right: 5px;
+}
+
+.tip {
+    border: 1px solid var(--border);
+    border-radius: 5px;
+    padding: 5px;
+}
+
+[data-malleable='true']:hover {
+    background-color: var(--border);
+}
