@@ -124,6 +124,9 @@ export class Malle {
    * Process the submit event: call user function and replace the input div with original element
    */
   submit(event): boolean {
+    // don't let the browser do anything
+    event.preventDefault();
+
     // trigger browser validity check
     // and abort if it's not valid
     if (!this.form.reportValidity()) {
