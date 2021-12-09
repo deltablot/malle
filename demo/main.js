@@ -43,6 +43,10 @@ const malle = new Malle({
   listenNow: true,
   listenOn: '.malleableTextarea',
   onBlur: Action.Ignore,
+  onEdit: (original, event, input) => {
+    console.log('onEdit function called');
+    console.log(input);
+  },
   submit: 'OK',
   submitClasses: ['btn', 'btn-primary'],
   tooltip: 'Click this to edit',

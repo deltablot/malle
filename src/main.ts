@@ -46,6 +46,7 @@ export interface Options {
   listenNow?: boolean;
   listenOn?: string;
   onBlur?: Action;
+  onEdit?(original: HTMLElement, event:Event, input: HTMLInputElement): boolean;
   selectOptions?: Array<SelectOptions>;
   submit?: string;
   submitClasses?: Array<string>;
@@ -85,6 +86,7 @@ export class Malle {
       listenNow: false,
       listenOn: '[data-malleable="true"]',
       onBlur: Action.Submit,
+      onEdit: undefined,
       selectOptions: [],
       submit: '',
       submitClasses: [],
@@ -258,5 +260,10 @@ export class Malle {
 
     this.input = input;
     this.form = form;
+
+    // execute the onEdit hook
+    if (typeof this.opt.onEdit === 'function') {
+      this.opt.onEdit(this.original, event, this.input);
+    }
   }
 }

@@ -111,6 +111,12 @@ default value: 'submit'
 
 What to do when the user clicks outside the input? By default the form will be submitted (if valid), but you can decide to do nothing or cancel the edition.
 
+#### onEdit
+`Function(original: HTMLElement, event: Event, input: HTMLInputElement): any`
+default: `undefined`
+
+This function will be called once the input is there and user is ready to type. The return value is not checked.
+
 #### selectOptions
 `Array<SelectOptions>`
 
