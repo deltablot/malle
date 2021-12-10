@@ -58,10 +58,10 @@ new Malle({
     return value;
   },
   formClasses: ['d-inline-flex'],
-  listenNow: true,
   onBlur: Action.Ignore,
   debug: true,
-});
+// instead of using listenNow, we call listen() right after instanciation
+}).listen();
 
 new Malle({
   fun: value => {

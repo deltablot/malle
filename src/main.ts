@@ -111,6 +111,7 @@ export class Malle {
         }
       });
     this.debug(`malle now listening for ${this.opt.event} events on elements with selector: ${this.opt.listenOn}`);
+    return this;
   }
 
   /**
