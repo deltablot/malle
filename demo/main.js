@@ -60,6 +60,7 @@ new Malle({
   formClasses: ['d-inline-flex'],
   listenNow: true,
   onBlur: Action.Ignore,
+  debug: true,
 });
 
 new Malle({

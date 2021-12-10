@@ -117,6 +117,16 @@ default: `undefined`
 
 This function will be called once the input is there and user is ready to type. The return value is not checked.
 
+#### onEnter
+`Action`
+* `Action.Submit` (`'submit'`)
+* `Action.Cancel` (`'cancel'`)
+* `Action.Ignore` (`'ignore'`)
+
+default value: 'submit'
+
+What to do when the user presses Enter key? By default the form will be submitted (if valid), but you can decide to do nothing or cancel the edition.
+
 #### selectOptions
 `Array<SelectOptions>`
 

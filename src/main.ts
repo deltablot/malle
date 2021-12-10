@@ -47,6 +47,7 @@ export interface Options {
   listenOn?: string;
   onBlur?: Action;
   onEdit?(original: HTMLElement, event:Event, input: HTMLInputElement): boolean;
+  onEnter?: Action;
   selectOptions?: Array<SelectOptions>;
   submit?: string;
   submitClasses?: Array<string>;
@@ -87,6 +88,7 @@ export class Malle {
       listenOn: '[data-malleable="true"]',
       onBlur: Action.Submit,
       onEdit: undefined,
+      onEnter: Action.Submit,
       selectOptions: [],
       submit: '',
       submitClasses: [],
@@ -138,10 +140,12 @@ export class Malle {
     return true;
   }
 
-  cancel(event): void {
+  cancel(event): boolean {
+    event.preventDefault();
     this.debug(event);
     this.debug('reverting to original element');
     this.form.replaceWith(this.original);
+    return true;
   }
 
   handleBlur(event) {
@@ -158,11 +162,22 @@ export class Malle {
   }
 
   handleKeypress(event): boolean {
-    // allow pressing enter for a textarea
-    if (event.key === 'Enter' && this.opt.inputType !== InputType.Textarea) {
-      return this.submit(event);
+    // we only care about the Enter key
+    // and ignore it for textarea
+    if (event.key !== 'Enter' || this.opt.inputType === InputType.Textarea) {
+      return false;
     }
-    return false;
+    // read behavior from options
+    let enterAction: string = this.opt.onEnter;
+    // and let element override it
+    if (this.original.dataset.maEnter) {
+      enterAction = this.original.dataset.maEnter;
+    }
+    if (enterAction === Action.Ignore) {
+      event.preventDefault();
+      return;
+    }
+    this[enterAction](event);
   }
 
   getInput(): HTMLInputElement {
