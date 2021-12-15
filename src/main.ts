@@ -48,6 +48,7 @@ export interface Options {
   onBlur?: Action;
   onEdit?(original: HTMLElement, event:Event, input: HTMLInputElement): boolean;
   onEnter?: Action;
+  placeholder?: string;
   selectOptions?: Array<SelectOptions>;
   submit?: string;
   submitClasses?: Array<string>;
@@ -89,6 +90,7 @@ export class Malle {
       onBlur: Action.Submit,
       onEdit: undefined,
       onEnter: Action.Submit,
+      placeholder: '',
       selectOptions: [],
       submit: '',
       submitClasses: [],
@@ -207,6 +209,15 @@ export class Malle {
     });
     // the value of the input is the current text of the original element
     input.value = this.original.innerText;
+
+    // PLACEHOLDER
+    if (this.opt.placeholder) {
+      input.placeholder = this.opt.placeholder;
+    }
+    // data-ma-placeholder will override the option
+    if (this.original.dataset.maPlaceholder) {
+      input.placeholder = this.original.dataset.maPlaceholder;
+    }
 
     // add options for a select
     if (this.opt.inputType === InputType.Select) {
