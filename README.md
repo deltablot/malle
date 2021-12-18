@@ -2,6 +2,9 @@
 
 Edit in place library with no dependencies and small footprint.
 
+![validate](https://github.com/deltablot/malle/workflows/validate/badge.svg)
+[![npm version](https://badge.fury.io/js/@deltablot%2Fmalle.svg)](https://badge.fury.io/js/@deltablot%2Fmalle)
+
 ## Description
 
 `malle` allows you to listen to a particular event (e.g. click, hover) on an element (e.g. p, span) and transform that element into an input that will be processed by a function.
