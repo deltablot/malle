@@ -2,10 +2,6 @@
 
 Edit in place library with no dependencies and small footprint.
 
-# WARNING: ALPHA VERSION!!
-
-Api will likely change, do not use!
-
 ## Description
 
 `malle` allows you to listen to a particular event (e.g. click, hover) on an element (e.g. p, span) and transform that element into an input that will be processed by a function.
@@ -21,18 +17,15 @@ The user provided function will typically POST to an endpoint to get some JSON b
 ## Installation
 
 ~~~bash
-npm i malle
+npm i @deltablot/malle
 # or
-yarn add malle
+yarn add @deltablot/malle
 ~~~
 
 ## Quickstart
 
 ~~~javascript
 import { Malle } from 'malle';
-
-const myCustomFunction = (value, event) => {
-};
 
 // now create the malle
 const malle = new Malle({
