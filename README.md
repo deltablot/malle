@@ -28,8 +28,10 @@ yarn add @deltablot/malle
 
 ## Quickstart
 
+This is a minimal example:
+
 ~~~javascript
-import { Malle } from 'malle';
+import { Malle } from '@deltablot/malle';
 
 // now create the malle
 const malle = new Malle({
@@ -46,9 +48,7 @@ const malle = new Malle({
       body: JSON.stringify({ 'name': value, 'id': original.dataset.id }),
     });
   },
-});
-// and listen for events
-malle.listen();
+}).listen(); // directly start listening after object creation
 ~~~
 
 In this example, when a user clicks on an element with `data-malleable='true'`, the function in the `fun` option will be called. The element will be replaced by a `form` containing the `input` and optionally action buttons (Submit, Cancel).
