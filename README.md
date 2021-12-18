@@ -4,6 +4,7 @@ Edit in place library with no dependencies and small footprint.
 
 ![validate](https://github.com/deltablot/malle/workflows/validate/badge.svg)
 [![npm version](https://badge.fury.io/js/@deltablot%2Fmalle.svg)](https://badge.fury.io/js/@deltablot%2Fmalle)
+[![GitHub license](https://img.shields.io/github/license/deltablot/malle.svg)](https://github.com/deltablot/malle/blob/master/LICENSE)
 
 ## Description
 
