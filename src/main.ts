@@ -6,6 +6,7 @@
  */
 
 export enum InputType {
+  Datetime = 'datetime-local',
   Email = 'email',
   Number = 'number',
   Select = 'select',
