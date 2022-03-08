@@ -1,0 +1,11 @@
+CHANGELOG.md
+CONTRIBUTING.md
+DOCUMENTATION.md
+FUNDING.yml
+.git
+.gitignore
+.github
+LICENSE
+node_modules
+README.md
+SECURITY.md

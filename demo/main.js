@@ -5,7 +5,18 @@
  * https://github.com/deltablot/malle
  */
 
-import { Action, InputType, Malle } from '../dist/main.js';
+// figure out if we are in dev mode or demo/prod mode by loading this file
+import config from './config.js';
+
+// in dev mode the lib is in the parent folder, but in the docker image it is in the current dir
+let libPath = './dist/main.js';
+if (config.env === 'dev') {
+  libPath = '.' + libPath;
+}
+
+// use a dynamic named import here
+const { Action, InputType, Malle } = await import(libPath);
+
 
 // this is the user function that will process the new value
 // typically this will POST to some endpoint and get some json back

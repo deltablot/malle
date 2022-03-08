@@ -14,7 +14,8 @@
   "scripts": {
     "build": "tsc",
     "lint": "eslint src",
-    "serve": "docker run --rm -it --name nginx-malle -p 8088:80 -v $(pwd):/usr/share/nginx/html:ro -d nginx",
+    "dev-server": "docker run --rm -it --name malle-dev -p 4813:80 -v $(pwd):/usr/share/nginx/html:ro -d nginx:stable-alpine",
+    "stop-dev": "docker stop malle-dev",
     "watch": "tsc --watch"
   },
   "devDependencies": {
