@@ -12,6 +12,7 @@
 body {
     background-color: var(--main-bg);
     padding-left: 2vw;
+    color: #444;
 }
 
 .btn {
@@ -26,4 +27,8 @@ body {
 
 [data-malleable='true']:hover {
     background-color: var(--border);
+}
+
+[data-malleable='true'] {
+    color: #000;
 }
