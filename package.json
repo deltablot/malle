@@ -15,10 +15,13 @@
     "build": "tsc",
     "lint": "eslint src",
     "dev-server": "docker run --rm -it --name malle-dev -p 4813:80 -v $(pwd):/usr/share/nginx/html:ro -d nginx:stable-alpine",
+    "pre-commit": "npm run lint && npm run test",
     "stop-dev": "docker stop malle-dev",
+    "test": "jest",
     "watch": "tsc --watch"
   },
   "devDependencies": {
+    "@types/jest": "^27.4.1",
     "@typescript-eslint/eslint-plugin": "^5.5.0",
     "@typescript-eslint/parser": "^5.5.0",
     "eslint": "^8.3.0",
@@ -26,6 +29,8 @@
     "eslint-plugin-import": "^2.25.3",
     "eslint-plugin-node": "^11.1.0",
     "eslint-plugin-promise": "^5.2.0",
+    "jest": "^27.5.1",
+    "ts-jest": "^27.1.3",
     "typescript": "^4.0.2"
   }
 }
