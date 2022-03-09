@@ -1,6 +1,11 @@
 # malle
 
-Edit in place library with no dependencies and small footprint.
+<p align="center">
+  <img src="https://i.imgur.com/nvWVtu2.png" />
+</p>
+
+
+Edit in place library with **no dependencies** and small footprint.
 
 ![validate](https://github.com/deltablot/malle/workflows/validate/badge.svg)
 [![npm version](https://badge.fury.io/js/@deltablot%2Fmalle.svg)](https://badge.fury.io/js/@deltablot%2Fmalle)
