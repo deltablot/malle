@@ -54,6 +54,7 @@ export interface Options {
   submit?: string;
   submitClasses?: Array<string>;
   tooltip?: string;
+  inputValue?: string;
 }
 
 export class Malle {
@@ -96,6 +97,7 @@ export class Malle {
       submit: '',
       submitClasses: [],
       tooltip: '',
+      inputValue: '',
     };
     return Object.assign(defaultOptions, options);
   }
@@ -209,7 +211,18 @@ export class Malle {
       input.classList.add(cl);
     });
     // the value of the input is the current text of the original element
-    input.value = this.original.innerText;
+    // but it can also be specified elsewhere
+    let value;
+    if (this.opt.inputValue) {
+      value = this.opt.inputValue;
+    }
+    if (this.original.dataset.maInputValue) {
+      value = this.original.dataset.maInputValue;
+    }
+    if (!value) {
+      value = this.original.innerText;
+    }
+    input.value = value;
 
     // PLACEHOLDER
     if (this.opt.placeholder) {
