@@ -1,5 +1,9 @@
 # Changelog for malle
 
+## 0.5.0
+
+* Add `inputValue` option to specify the value of the input in case we want something else than the innerText of the element
+
 ## 0.4.0
 
 * Add `datetime-local` input type
