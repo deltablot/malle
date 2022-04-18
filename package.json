@@ -1,6 +1,6 @@
 {
   "name": "@deltablot/malle",
-  "version": "0.6.0",
+  "version": "0.6.1",
   "description": "Make text elements malleable",
   "main": "dist/main.js",
   "repository": "https://github.com/deltablot/malle",

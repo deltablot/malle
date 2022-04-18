@@ -1,5 +1,9 @@
 # Changelog for malle
 
+## 0.6.1
+
+* Fix lint issue
+
 ## 0.6.0
 
 * Add `requireDiff` option (defaults to true) to avoid calling `fun` if input is same as previous value.

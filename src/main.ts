@@ -144,8 +144,9 @@ export class Malle {
     }
     // compare user input and original value: possibly abort if they are the same
     if (this.opt.requireDiff) {
-      const newValue = this.opt.inputType === InputType.Select ?
-        (this.input as HTMLSelectElement).options[(this.input as HTMLSelectElement).selectedIndex].text : this.input.value;
+      const newValue = this.opt.inputType === InputType.Select
+        ? (this.input as HTMLSelectElement).options[(this.input as HTMLSelectElement).selectedIndex].text
+        : this.input.value;
 
       if (this.original.innerText === newValue) {
         this.debug('original value is same as new value, reverting without calling fun');
