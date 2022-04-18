@@ -50,6 +50,7 @@ export interface Options {
   onEdit?(original: HTMLElement, event:Event, input: HTMLInputElement): boolean;
   onEnter?: Action;
   placeholder?: string;
+  requireDiff?: boolean;
   selectOptions?: Array<SelectOptions>;
   submit?: string;
   submitClasses?: Array<string>;
@@ -93,6 +94,7 @@ export class Malle {
       onEdit: undefined,
       onEnter: Action.Submit,
       placeholder: '',
+      requireDiff: true,
       selectOptions: [],
       submit: '',
       submitClasses: [],
@@ -139,6 +141,17 @@ export class Malle {
     // and abort if it's not valid
     if (!this.form.reportValidity()) {
       return false;
+    }
+    // compare user input and original value: possibly abort if they are the same
+    if (this.opt.requireDiff) {
+      const newValue = this.opt.inputType === InputType.Select ?
+        (this.input as HTMLSelectElement).options[(this.input as HTMLSelectElement).selectedIndex].text : this.input.value;
+
+      if (this.original.innerText === newValue) {
+        this.debug('original value is same as new value, reverting without calling fun');
+        this.form.replaceWith(this.original);
+        return false;
+      }
     }
     const value = this.opt.fun.call(this, this.input.value, this.original, event, this.input);
     this.original.innerText = this.opt.inputType === InputType.Select ? (this.input as HTMLSelectElement).options[(this.input as HTMLSelectElement).selectedIndex].text : value;

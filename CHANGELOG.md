@@ -1,5 +1,9 @@
 # Changelog for malle
 
+## 0.6.0
+
+* Add `requireDiff` option (defaults to true) to avoid calling `fun` if input is same as previous value.
+
 ## 0.5.0
 
 * Add `inputValue` option to specify the value of the input in case we want something else than the innerText of the element

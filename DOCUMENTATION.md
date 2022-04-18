@@ -127,6 +127,13 @@ default value: 'submit'
 
 What to do when the user presses Enter key? By default the form will be submitted (if valid), but you can decide to do nothing or cancel the edition.
 
+#### requireDiff
+boolean
+
+default: `true`
+
+By default, the `fun` function won't be called in the input value is the same as the original value. Set to `false` to always call `fun` regardless of input.
+
 #### selectOptions
 `Array<SelectOptions>`
 
