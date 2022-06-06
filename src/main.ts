@@ -1,6 +1,6 @@
 /*!
  * This file is part of the "malle" library
- * Copyright 2021 Nicolas CARPi @ Deltablot
+ * Copyright 2021, 2022 Nicolas CARPi @ Deltablot
  * License MIT
  * https://github.com/deltablot/malle
  */
@@ -28,8 +28,8 @@ export enum Action {
 }
 
 export interface SelectOptions {
-  value: string;
-  text: string;
+  value?: string;
+  text?: string;
   selected?: boolean;
 }
 
@@ -51,7 +51,9 @@ export interface Options {
   onEnter?: Action;
   placeholder?: string;
   requireDiff?: boolean;
-  selectOptions?: Array<SelectOptions>;
+  selectOptions?: Array<SelectOptions> | Promise<Array<SelectOptions>>;
+  selectOptionsValueKey?: string;
+  selectOptionsTextKey?: string;
   submit?: string;
   submitClasses?: Array<string>;
   tooltip?: string;
@@ -96,6 +98,8 @@ export class Malle {
       placeholder: '',
       requireDiff: true,
       selectOptions: [],
+      selectOptionsValueKey: 'value',
+      selectOptionsTextKey: 'text',
       submit: '',
       submitClasses: [],
       tooltip: '',
@@ -249,12 +253,14 @@ export class Malle {
 
     // add options for a select
     if (this.opt.inputType === InputType.Select) {
-      this.opt.selectOptions.forEach(o => {
-        const option = document.createElement('option');
-        option.value = o.value;
-        option.innerText = o.text;
-        option.selected = o.selected ?? false;
-        input.appendChild(option);
+      Promise.resolve(this.opt.selectOptions).then(o => {
+        o.forEach(o => {
+          const option = document.createElement('option');
+          option.value = o[this.opt.selectOptionsValueKey];
+          option.innerText = o[this.opt.selectOptionsTextKey];
+          option.selected = (o.selected ?? false) || this.original.innerText === o[this.opt.selectOptionsTextKey];
+          input.appendChild(option);
+        });
       });
     }
     // listen on keypress for Enter key

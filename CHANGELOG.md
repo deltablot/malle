@@ -1,5 +1,12 @@
 # Changelog for malle
 
+## 0.7.0
+
+* Allow `selectOptions` to be a Promise
+* Add options `selectOptionsValueKey` and `selectOptionsTextKey` to customize the keys to use for value/text in generated options
+* Automatically select the correct option in a select input if original text is the same as option's text
+* Allow `SelectOptions` to have different keys
+
 ## 0.6.1
 
 * Fix lint issue
