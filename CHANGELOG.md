@@ -1,5 +1,11 @@
 # Changelog for malle
 
+## 1.0.0
+
+* Minor typings changes
+* Add missing definitions file
+* Upgrade dependencies
+
 ## 0.7.0
 
 * Allow `selectOptions` to be a Promise

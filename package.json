@@ -1,15 +1,17 @@
 {
   "name": "@deltablot/malle",
-  "version": "0.7.0",
+  "version": "1.0.0",
   "description": "Make text elements malleable",
   "main": "dist/main.js",
+  "typings":  "dist/main.d.ts",
   "repository": "https://github.com/deltablot/malle",
   "author": "Nicolas CARPi @ Deltablot>",
   "license": "MIT",
   "private": false,
   "files": [
     "dist/*.js",
-    "dist/*.js.map"
+    "dist/*.js.map",
+    "dist/*.d.ts"
   ],
   "scripts": {
     "build": "tsc",
@@ -24,11 +26,11 @@
     "@types/jest": "^27.4.1",
     "@typescript-eslint/eslint-plugin": "^5.5.0",
     "@typescript-eslint/parser": "^5.5.0",
-    "eslint": "^8.3.0",
-    "eslint-config-standard": "^16.0.3",
+    "eslint": "^8.23.0",
+    "eslint-config-standard": "^17.0.0",
     "eslint-plugin-import": "^2.25.3",
     "eslint-plugin-node": "^11.1.0",
-    "eslint-plugin-promise": "^5.2.0",
+    "eslint-plugin-promise": "^6.0.0",
     "jest": "^27.5.1",
     "ts-jest": "^27.1.3",
     "typescript": "^4.0.2"

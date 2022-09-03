@@ -137,7 +137,7 @@ export class Malle {
   /**
    * Process the submit event: call user function and replace the input div with original element
    */
-  submit(event): boolean {
+  submit(event: Event): boolean {
     // don't let the browser do anything
     event.preventDefault();
 
@@ -164,15 +164,15 @@ export class Malle {
     return true;
   }
 
-  cancel(event): boolean {
+  cancel(event: Event): boolean {
     event.preventDefault();
-    this.debug(event);
+    this.debug(event.toString());
     this.debug('reverting to original element');
     this.form.replaceWith(this.original);
     return true;
   }
 
-  handleBlur(event) {
+  handleBlur(event: Event) {
     // read behavior from options
     let blurAction: string = this.opt.onBlur;
     // and let element override it
@@ -185,7 +185,7 @@ export class Malle {
     this[blurAction](event);
   }
 
-  handleKeypress(event): boolean {
+  handleKeypress(event: KeyboardEvent): boolean {
     // we only care about the Enter key
     // and ignore it for textarea
     if (event.key !== 'Enter' || this.opt.inputType === InputType.Textarea) {
@@ -230,7 +230,7 @@ export class Malle {
     });
     // the value of the input is the current text of the original element
     // but it can also be specified elsewhere
-    let value;
+    let value: string;
     if (this.opt.inputValue) {
       value = this.opt.inputValue;
     }
@@ -276,11 +276,11 @@ export class Malle {
   /**
    * Process the triggering event: replace target element with an input
    */
-  process(event) {
+  process(event: Event) {
     this.debug('Event triggered:');
-    this.debug(event);
+    this.debug(event.toString());
 
-    const el = event.currentTarget;
+    const el = event.currentTarget as HTMLElement;
     // keep the original element around
     this.original = el;
 
@@ -307,7 +307,7 @@ export class Malle {
         btn.innerText = this.opt[action];
         // add classes to button
         const actionClasses = action + 'Classes';
-        this.opt[actionClasses].forEach(cl => {
+        this.opt[actionClasses].forEach((cl: string) => {
           btn.classList.add(cl);
         });
         // execute action on click
