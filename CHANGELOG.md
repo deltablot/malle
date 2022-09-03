@@ -1,5 +1,9 @@
 # Changelog for malle
 
+## 1.0.1
+
+* Switch eslint-plugin-node (unmaintained) to eslint-plugin-n
+
 ## 1.0.0
 
 * Minor typings changes
