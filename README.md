@@ -47,11 +47,7 @@ const malle = new Malle({
     console.log(`Original element:`);
     console.log(original);
     // add here your code for POSTing the new value
-    // something along the line of:
-    return fetch('/ajax', {
-      method: 'POST',
-      body: JSON.stringify({ 'name': value, 'id': original.dataset.id }),
-    });
+    return myFunctionReturingAPromiseString();
   },
 }).listen(); // directly start listening after object creation
 ~~~

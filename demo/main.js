@@ -24,7 +24,7 @@ const { Action, InputType, Malle } = await import(libPath);
 const myCustomFunction = (value, orig) => {
   console.log(`New text: ${value}`);
   // do something with that value, like POSTing it somewhere
-  return value;
+  return new Promise(resolve => resolve(value));
 };
 
 // minimal options
@@ -66,7 +66,7 @@ const malle = new Malle({
 // this has no listenOn option so it will listen on all data-malleable='true' elements
 new Malle({
   fun: value => {
-    return value;
+    return new Promise(resolve => resolve(value));
   },
   formClasses: ['d-inline-flex'],
   onBlur: Action.Ignore,
@@ -76,7 +76,7 @@ new Malle({
 
 new Malle({
   fun: value => {
-    return value;
+    return new Promise(resolve => resolve(value));
   },
   inputType: InputType.Select,
   selectOptions: [

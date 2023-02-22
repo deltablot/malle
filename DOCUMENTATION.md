@@ -84,10 +84,10 @@ default: `true`
 Bring the input into focus.
 
 #### fun (required)
-`Function(value: string, original: HTMLElement, event: Event, input: HTMLInputElement): string`
+`Function(value: string, original: HTMLElement, event: Event, input: HTMLInputElement): Promise<string>`
 default: `undefined`
 
-This is your function doing the hard work. It must return the `value` as a string, and this will be the new value of the target element. Use the original element, the event or the input to achieve what you want. Typically, this function will make a POST or PUT request to update the value in the backend.
+This is your function doing the hard work. It must return the `value` as a `Promise<string>`, and this string will be the new value of the target element. Use the original element, the event or the input to achieve what you want. Typically, this function will make a POST or PUT request to update the value in the backend.
 
 #### listenNow
 boolean
@@ -166,5 +166,3 @@ string
 default: `''`
 
 Set the title of the elements we listen on. You could use something like `Click to edit!`. The text will be visible if the mouse is hovering the element.
-
-

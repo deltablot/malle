@@ -43,7 +43,7 @@ export interface Options {
   event?: EventType;
   inputType?: InputType;
   focus?: boolean;
-  fun(value: string, original: HTMLElement, event:Event, input: HTMLInputElement): string;
+  fun(value: string, original: HTMLElement, event:Event, input: HTMLInputElement): Promise<string>;
   listenNow?: boolean;
   listenOn?: string;
   onBlur?: Action;
@@ -158,9 +158,10 @@ export class Malle {
         return false;
       }
     }
-    const value = this.opt.fun.call(this, this.input.value, this.original, event, this.input);
-    this.original.innerText = this.opt.inputType === InputType.Select ? (this.input as HTMLSelectElement).options[(this.input as HTMLSelectElement).selectedIndex].text : value;
-    this.form.replaceWith(this.original);
+    this.opt.fun.call(this, this.input.value, this.original, event, this.input).then((value: string) => {
+      this.original.innerText = this.opt.inputType === InputType.Select ? (this.input as HTMLSelectElement).options[(this.input as HTMLSelectElement).selectedIndex].text : value;
+      this.form.replaceWith(this.original);
+    });
     return true;
   }
 

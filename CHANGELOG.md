@@ -1,5 +1,9 @@
 # Changelog for malle
 
+## 2.0.0
+
+* The `fun` function now expects a `Promise<string>` as return value
+
 ## 1.0.1
 
 * Switch eslint-plugin-node (unmaintained) to eslint-plugin-n
