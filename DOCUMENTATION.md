@@ -18,6 +18,12 @@ When instanciating the `Malle` class, you need to give it an `Options` argument.
 
 Available options:
 
+#### after
+`Function(original: HTMLElement, event: Event, value: string): boolean`
+default: `undefined`
+
+This function will be called after everything is processed.
+
 #### before
 `Function(original: HTMLElement, event: Event): boolean`
 default: `undefined`

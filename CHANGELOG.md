@@ -1,5 +1,9 @@
 # Changelog for malle
 
+## 2.1.0
+
+* Add `after` hook, triggered after replacement of element.
+
 ## 2.0.0
 
 * The `fun` function now expects a `Promise<string>` as return value

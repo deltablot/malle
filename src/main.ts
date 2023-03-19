@@ -34,6 +34,7 @@ export interface SelectOptions {
 }
 
 export interface Options {
+  after?(original: HTMLElement, event:Event, value: string): boolean;
   before?(original: HTMLElement, event:Event): boolean;
   cancel?: string;
   cancelClasses?: Array<string>;
@@ -79,6 +80,7 @@ export class Malle {
    */
   normalizeOptions(options: Options): Options {
     const defaultOptions = {
+      after: undefined,
       before: undefined,
       cancel: '',
       cancelClasses: [],
@@ -161,7 +163,12 @@ export class Malle {
     this.opt.fun.call(this, this.input.value, this.original, event, this.input).then((value: string) => {
       this.original.innerText = this.opt.inputType === InputType.Select ? (this.input as HTMLSelectElement).options[(this.input as HTMLSelectElement).selectedIndex].text : value;
       this.form.replaceWith(this.original);
+      // execute the after hook
+      if (typeof this.opt.after === 'function') {
+        return this.opt.after(this.original, event, value);
+      }
     });
+
     return true;
   }
 
