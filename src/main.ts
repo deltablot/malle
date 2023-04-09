@@ -6,12 +6,15 @@
  */
 
 export enum InputType {
+  Color = 'color',
+  Date = 'date',
   Datetime = 'datetime-local',
   Email = 'email',
   Number = 'number',
   Select = 'select',
   Text = 'text',
   Textarea = 'textarea',
+  Time = 'time',
   Url = 'url',
 }
 

@@ -1,5 +1,9 @@
 # Changelog for malle
 
+## 2.2.0
+
+* Add `color`, `date`, `time` input types.
+
 ## 2.1.0
 
 * Add `after` hook, triggered after replacement of element.
