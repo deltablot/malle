@@ -1,5 +1,9 @@
 # Changelog for malle
 
+## 2.3.0
+
+* Add `returnedValueIsTrustedHtml` so the function used on original element is `innerHTML` instead of the safer `innerText`.
+
 ## 2.2.0
 
 * Add `color`, `date`, `time` input types.
