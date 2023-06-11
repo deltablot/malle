@@ -1,8 +1,9 @@
 # Changelog for malle
 
-## 2.4.0
+## 2.4.2
 
 * Add `onEscape` option to set behavior of Escape keypress (fix #6)
+* Previous releases 2.4.0 and 2.4.1 were incorrect in terms of tags/versions
 
 ## 2.3.0
 
