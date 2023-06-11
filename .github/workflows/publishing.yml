@@ -7,11 +7,11 @@ jobs:
     runs-on: ubuntu-latest
     name: Publish latest release
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - name: Setup node
-        uses: actions/setup-node@v2
+        uses: actions/setup-node@v3
         with:
-          node-version: '16.x'
+          node-version: '20.x'
           cache: 'npm'
           registry-url: 'https://registry.npmjs.org'
       - name: Install dependencies
@@ -19,7 +19,7 @@ jobs:
       - name: Build dist files
         run: npm run build
       - name: Publish package
-        uses: JS-DevTools/npm-publish@v1
+        uses: JS-DevTools/npm-publish@v2
         with:
           token: ${{ secrets.NPM_TOKEN }}
           access: 'public'
