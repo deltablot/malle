@@ -1,5 +1,9 @@
 # Changelog for malle
 
+## 2.3.0
+
+* Add `onEscape` option to set behavior of Escape keypress (fix #6)
+
 ## 2.2.0
 
 * Add `color`, `date`, `time` input types.
