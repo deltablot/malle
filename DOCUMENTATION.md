@@ -133,6 +133,16 @@ default value: 'submit'
 
 What to do when the user presses Enter key? By default the form will be submitted (if valid), but you can decide to do nothing or cancel the edition.
 
+#### onEscape
+`Action`
+* `Action.Submit` (`'submit'`)
+* `Action.Cancel` (`'cancel'`)
+* `Action.Ignore` (`'ignore'`)
+
+default value: 'cancel'
+
+What to do when the user presses Escape key? By default the form will be cancelled, but you can decide to do nothing or even submit the form if you're crazy.
+
 #### requireDiff
 boolean
 

@@ -53,6 +53,7 @@ export interface Options {
   onBlur?: Action;
   onEdit?(original: HTMLElement, event:Event, input: HTMLInputElement): boolean;
   onEnter?: Action;
+  onEscape?: Action;
   placeholder?: string;
   requireDiff?: boolean;
   returnedValueIsTrustedHtml?: boolean;
@@ -105,6 +106,7 @@ export class Malle {
       onBlur: Action.Submit,
       onEdit: undefined,
       onEnter: Action.Submit,
+      onEscape: Action.Cancel,
       placeholder: '',
       requireDiff: true,
       returnedValueIsTrustedHtml: false,
@@ -203,22 +205,38 @@ export class Malle {
   }
 
   handleKeypress(event: KeyboardEvent): boolean {
-    // we only care about the Enter key
-    // and ignore it for textarea
-    if (event.key !== 'Enter' || this.opt.inputType === InputType.Textarea) {
+    // ignore it for textarea
+    if (this.opt.inputType === InputType.Textarea) {
       return false;
     }
-    // read behavior from options
-    let enterAction: string = this.opt.onEnter;
-    // and let element override it
-    if (this.original.dataset.maEnter) {
-      enterAction = this.original.dataset.maEnter;
-    }
-    if (enterAction === Action.Ignore) {
-      event.preventDefault();
+    if (event.key === 'Enter') {
+      // read behavior from options
+      let enterAction: string = this.opt.onEnter;
+      // and let element override it
+      if (this.original.dataset.maEnter) {
+        enterAction = this.original.dataset.maEnter;
+      }
+      if (enterAction === Action.Ignore) {
+        event.preventDefault();
+        return;
+      }
+      this[enterAction](event);
       return;
     }
-    this[enterAction](event);
+
+    if (event.key === 'Escape') {
+      // read behavior from options
+      let escAction: string = this.opt.onEscape;
+      // and let element override it
+      if (this.original.dataset.maEscape) {
+        escAction = this.original.dataset.maEscape;
+      }
+      if (escAction === Action.Ignore) {
+        event.preventDefault();
+        return;
+      }
+      this[escAction](event);
+    }
   }
 
   getInput(): HTMLInputElement {
@@ -280,8 +298,9 @@ export class Malle {
         });
       });
     }
-    // listen on keypress for Enter key
-    input.addEventListener('keypress', this.handleKeypress.bind(this));
+    // listen on keypress for Enter/Escape keys. Note that Escape will only appear with keydown/keyup, not keypress event.
+    // and we need to use keydown instead of keyup otherwise the default behavior is processed.
+    input.addEventListener('keydown', this.handleKeypress.bind(this));
     // listen also on blur events
     // but only if there is no action buttons
     if (this.opt.submit === '' && this.opt.cancel === '') {

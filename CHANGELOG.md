@@ -1,5 +1,9 @@
 # Changelog for malle
 
+## 2.4.0
+
+* Add `onEscape` option to set behavior of Escape keypress (fix #6)
+
 ## 2.3.0
 
 * Add `returnedValueIsTrustedHtml` so the function used on original element is `innerHTML` instead of the safer `innerText`.
