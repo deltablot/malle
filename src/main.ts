@@ -56,6 +56,7 @@ export interface Options {
   onEscape?: Action;
   placeholder?: string;
   requireDiff?: boolean;
+  returnedValueIsTrustedHtml?: boolean;
   selectOptions?: Array<SelectOptions> | Promise<Array<SelectOptions>>;
   selectOptionsValueKey?: string;
   selectOptionsTextKey?: string;
@@ -70,6 +71,7 @@ export class Malle {
   opt: Options;
   original: HTMLElement;
   input: HTMLInputElement|HTMLSelectElement;
+  innerFun: string;
 
   constructor(options: Options) {
     this.opt = this.normalizeOptions(options);
@@ -77,6 +79,9 @@ export class Malle {
     if (this.opt.listenNow) {
       this.listen();
     }
+    // by default we use innerText to insert the return value, but if we know it's trusted html we get back, we allow using innerHTML instead
+    // once setHTML() becomes more widespread, we'll use that instead
+    this.innerFun = this.opt.returnedValueIsTrustedHtml ? 'innerHTML' : 'innerText';
   }
 
   /**
@@ -104,6 +109,7 @@ export class Malle {
       onEscape: Action.Cancel,
       placeholder: '',
       requireDiff: true,
+      returnedValueIsTrustedHtml: false,
       selectOptions: [],
       selectOptionsValueKey: 'value',
       selectOptionsTextKey: 'text',
@@ -166,7 +172,7 @@ export class Malle {
       }
     }
     this.opt.fun.call(this, this.input.value, this.original, event, this.input).then((value: string) => {
-      this.original.innerText = this.opt.inputType === InputType.Select ? (this.input as HTMLSelectElement).options[(this.input as HTMLSelectElement).selectedIndex].text : value;
+      this.original[this.innerFun] = this.opt.inputType === InputType.Select ? (this.input as HTMLSelectElement).options[(this.input as HTMLSelectElement).selectedIndex].text : value;
       this.form.replaceWith(this.original);
       // execute the after hook
       if (typeof this.opt.after === 'function') {
@@ -286,8 +292,8 @@ export class Malle {
         o.forEach(o => {
           const option = document.createElement('option');
           option.value = o[this.opt.selectOptionsValueKey];
-          option.innerText = o[this.opt.selectOptionsTextKey];
-          option.selected = (o.selected ?? false) || this.original.innerText === o[this.opt.selectOptionsTextKey];
+          option[this.innerFun] = o[this.opt.selectOptionsTextKey];
+          option.selected = (o.selected ?? false) || this.original[this.innerFun] === o[this.opt.selectOptionsTextKey];
           input.appendChild(option);
         });
       });

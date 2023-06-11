@@ -150,6 +150,13 @@ default: `true`
 
 By default, the `fun` function won't be called in the input value is the same as the original value. Set to `false` to always call `fun` regardless of input.
 
+#### returnedValueIsTrustedHtml
+boolean
+
+default: `false`
+
+If `true`, `innerHTML` is used instead of `innerText` with the returned value from the server. Helps with html-encoded strings ending up wrongly displayed after an edit/save. Only set to `true` if you sanitize output and have a strict CSP.
+
 #### selectOptions
 `Array<SelectOptions>`
 
