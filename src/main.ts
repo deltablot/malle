@@ -127,7 +127,10 @@ export class Malle {
   listen() {
     document.querySelectorAll(this.opt.listenOn)
       .forEach((el: HTMLElement) => {
-        el.addEventListener(this.opt.event, this.process.bind(this));
+        const opt = this.opt;
+        opt.listenNow = false;
+        const m = new Malle(opt);
+        el.addEventListener(this.opt.event, m.process.bind(m));
         // make the mouse change to pointer on targeted elements
         el.style.cursor = 'pointer';
         if (this.opt.tooltip) {
