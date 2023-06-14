@@ -1,5 +1,9 @@
 # Changelog for malle
 
+## 2.5.0
+
+* Create a new instance of Malle for each element (PR #8). This allows opening multiple inputs at the same time. fix #4
+
 ## 2.4.2
 
 * Add `onEscape` option to set behavior of Escape keypress (fix #6)
