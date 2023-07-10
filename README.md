@@ -23,6 +23,10 @@ The created input can be a normal input or a textarea.
 
 The user provided function will typically POST to an endpoint to get some JSON back.
 
+## Maintenance status
+
+`malle` is currently **MAINTAINED** and used in production environments.
+
 ## Installation
 
 ~~~bash
