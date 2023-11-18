@@ -14,7 +14,7 @@
     "dist/*.d.ts"
   ],
   "scripts": {
-    "build": "tsc",
+    "build": "tsc && cp -v dist/main.js demo/malle.js",
     "lint": "eslint src",
     "dev-server": "docker run --rm -it --name malle-dev -p 4813:80 -v $(pwd):/usr/share/nginx/html:ro -d nginx:stable-alpine",
     "pre-commit": "npm run lint && npm run test",

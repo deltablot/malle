@@ -9,7 +9,7 @@
 import config from './config.js';
 
 // in dev mode the lib is in the parent folder, but in the docker image it is in the current dir
-let libPath = './dist/main.js';
+let libPath = './malle.js';
 if (config.env === 'dev') {
   libPath = '.' + libPath;
 }
