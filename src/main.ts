@@ -47,11 +47,11 @@ export interface Options {
   event?: EventType;
   inputType?: InputType;
   focus?: boolean;
-  fun(value: string, original: HTMLElement, event:Event, input: HTMLInputElement): Promise<string>;
+  fun(value: string, original: HTMLElement, event:Event, input: HTMLInputElement|HTMLSelectElement): Promise<string>;
   listenNow?: boolean;
   listenOn?: string;
   onBlur?: Action;
-  onEdit?(original: HTMLElement, event:Event, input: HTMLInputElement): boolean;
+  onEdit?(original: HTMLElement, event:Event, input: HTMLInputElement|HTMLSelectElement): boolean;
   onEnter?: Action;
   onEscape?: Action;
   placeholder?: string;
