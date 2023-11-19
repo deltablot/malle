@@ -1,6 +1,6 @@
 {
   "name": "@deltablot/malle",
-  "version": "2.5.1",
+  "version": "2.5.2",
   "description": "Make text elements malleable, without dependencies.",
   "main": "dist/main.js",
   "typings":  "dist/main.d.ts",

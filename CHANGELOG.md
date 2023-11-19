@@ -1,5 +1,9 @@
 # Changelog for malle
 
+## 2.5.2
+
+* Allow returning a `Promise<boolean>` with `onEdit`
+
 ## 2.5.1
 
 * Fix the type of `input` from `fun` or `onEdit` to `HTMLInputElement|HTMLSelectElement`

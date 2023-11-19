@@ -51,7 +51,7 @@ export interface Options {
   listenNow?: boolean;
   listenOn?: string;
   onBlur?: Action;
-  onEdit?(original: HTMLElement, event:Event, input: HTMLInputElement|HTMLSelectElement): boolean;
+  onEdit?(original: HTMLElement, event:Event, input: HTMLInputElement|HTMLSelectElement): boolean | Promise<boolean>;
   onEnter?: Action;
   onEscape?: Action;
   placeholder?: string;
