@@ -4,15 +4,7 @@
  * License MIT
  * https://github.com/deltablot/malle
  */
-
-// figure out if we are in dev mode or demo/prod mode by loading this file
-import config from './config.js';
-
-// in dev mode the lib is in the parent folder, but in the docker image it is in the current dir
-let libPath = './main.js';
-if (config.env === 'dev') {
-  libPath = '../dist/' + libPath;
-}
+const libPath = '../dist/main.js';
 
 // use a dynamic named import here
 const { Action, InputType, Malle } = await import(libPath);
