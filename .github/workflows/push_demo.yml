@@ -38,8 +38,8 @@ jobs:
         run: npm ci
       - name: Build dist files
         run: npm run build
-      - name: Set env to prod
-        run: sed -i -e 's/dev/prod/' demo/config.js
+          #- name: Set env to prod
+          #run: sed -i -e 's/dev/prod/' demo/config.js
       - name: Setup Pages
         uses: actions/configure-pages@v3
       - name: Upload artifact
