@@ -38,6 +38,10 @@ jobs:
         run: npm ci
       - name: Build dist files
         run: npm run build
+      - name: Fix lib load path
+        run: sed -i -e 's:./dist::' demo/demo.js
+      - name: Copy lib
+        run: cp dist/main.js demo/
       - name: Setup Pages
         uses: actions/configure-pages@v3
       - name: Upload artifact
