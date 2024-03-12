@@ -38,6 +38,8 @@ jobs:
         run: npm ci
       - name: Build dist files
         run: npm run build
+      - name: Build api doc
+        run: npm run build-docs-demo
       - name: Fix lib load path
         run: sed -i -e 's:./dist::' demo/demo.js
       - name: Copy lib
