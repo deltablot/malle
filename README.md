@@ -60,7 +60,7 @@ In this example, when a user clicks on an element with `data-malleable='true'`, 
 
 Head to the [Demo](https://deltablot.github.io/malle/) to see more examples.
 
-See the [Documentation](./DOCUMENTATION.md) for usage and available options.
+See the [API Documentation](https://deltablot.github.io/malle/api) for usage and available options.
 
 ## Maintenance status
 

@@ -1,5 +1,7 @@
 # Documentation for malle
 
+# DEPRECATED, replaced by typedoc
+
 Note: you can use this library in a typescript or javascript project. When in typescript, import the interfaces to have strong typing everywhere.
 
 ~~~javascript
