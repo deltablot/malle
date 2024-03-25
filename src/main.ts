@@ -79,6 +79,7 @@ export interface Options {
   /**
    * This is the main and only mandatory option parameter. It is the user function that is called when the Submit action happens.
    * @example with a custom function
+   * ```
    * // this is the user function that will process the new value
    * // typically this will POST to some endpoint and get some json back
    * // it receives the event
@@ -91,6 +92,7 @@ export interface Options {
    * new Malle({
    *   fun: myCustomFunction,
    * }).listen();
+   * ```
    */
   fun(value: string, original: HTMLElement, event:Event, input: HTMLInputElement|HTMLSelectElement): Promise<string>;
   // The classes added to the input element.
