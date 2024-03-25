@@ -1,8 +1,13 @@
 # How to contribute to malle
 
-## Branches
+## Getting started
 
-The `master` branch corresponds to the latest stable version. You should work on a new branch from master, and target the `master` branch for your pull request.
+1. Fork the repository
+2. Clone it locally
+3. Create a branch from `master` to work on
+4. Commit your changes
+5. Push your changes
+6. Open a Pull Request
 
 ## Dev server
 
