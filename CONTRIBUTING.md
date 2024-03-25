@@ -2,7 +2,7 @@
 
 ## Branches
 
-The `master` branch corresponds to the latest stable version. You should work from and target the `dev` branch.
+The `master` branch corresponds to the latest stable version. You should work on a new branch from master, and target the `master` branch for your pull request.
 
 ## Dev server
 
