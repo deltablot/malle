@@ -59,50 +59,125 @@ export interface Options {
    */
   before?(original: HTMLElement, event:Event): boolean;
   // The text displayed on Cancel button.
+  // @example Abort
   cancel?: string;
   // The classes added to Cancel button.
+  // @example ['btn', 'btn-secondary']
   cancelClasses?: Array<string>;
-  // The classes added to the form element.
-  formClasses?: Array<string>;
-  // The classes added to the input element.
-  inputClasses?: Array<string>,
   // Enabling debug mode will produce verbose output in the console.
+  // @default false
   debug?: boolean;
   // This is where you define the type of event that will trigger malle.
+  // @default EventType.Click
   event?: EventType;
   // Should the newly created input grab focus?
-  inputType?: InputType;
-  // This is the user function that is called on submit.
+  // @default true
   focus?: boolean;
-  // Define the type of the input element.
+  // The classes added to the form element.
+  // @example ['d-inline-flex']
+  formClasses?: Array<string>;
+  /**
+   * This is the main and only mandatory option parameter. It is the user function that is called when the Submit action happens.
+   * @example with a custom function
+   * // this is the user function that will process the new value
+   * // typically this will POST to some endpoint and get some json back
+   * // it receives the event
+   * const myCustomFunction = (value, orig) => {
+   *   console.log(`New text: ${value}`);
+   *   // do something with that value, like POSTing it somewhere
+   *   return new Promise(resolve => resolve(value));
+   * };
+   *
+   * new Malle({
+   *   fun: myCustomFunction,
+   * }).listen();
+   */
   fun(value: string, original: HTMLElement, event:Event, input: HTMLInputElement|HTMLSelectElement): Promise<string>;
+  // The classes added to the input element.
+  // @example ['form-control']
+  inputClasses?: Array<string>,
+  // Define the type of the input element.
+  // @default InputType.Text
+  inputType?: InputType;
   // Start listening immediatly or not.
+  // @default false
   listenNow?: boolean;
   // HTML selector to target malleable elements on the page.
   listenOn?: string;
   // What Action should be taken when focus of the input is lost.
   onBlur?: Action;
-  // This function runs right after the form is created.
+  /**
+   * A function that runs when a Cancel action is performed. Must return `true` or the input is not reverted to the original element.
+   * @example
+   * ```javascript
+   * onCancel: (original, event, input) => {
+   *   console.log('a cancel action has been detected');
+   *   return true;
+   * },
+   * ```
+   */
+  onCancel?(original: HTMLElement, event:Event, input: HTMLInputElement|HTMLSelectElement): boolean | Promise<boolean>;
+  /**
+   * This function runs right after the form is created. Its return value has no impact.
+   * @example
+   * ```javascript
+   * onEdit: (original, event, input) => {
+   *   console.log('this will run after the input is present on the page');
+   *   return true;
+   * },
+   * ```
+   */
   onEdit?(original: HTMLElement, event:Event, input: HTMLInputElement|HTMLSelectElement): boolean | Promise<boolean>;
   // What Action should be taken when the Enter key is pressed?
+  // @default Action.Submit
   onEnter?: Action;
   // What Action should be taken when the Escape key is pressed?
+  // @default Action.Cancel
   onEscape?: Action;
   // A text that is shown on empty input.
   placeholder?: string;
   // Do nothing if new value is the same as the old value.
+  // @default true
   requireDiff?: boolean;
   // Use innerHTML instead of innerText (only use if the return value is trusted HTML).
+  // @default false
   returnedValueIsTrustedHtml?: boolean;
-  // An array of options for InputType.Select. Can also be a Promise and fetched asynchronously.
+  /*
+   * An array of options for InputType.Select. Can also be a Promise and fetched asynchronously.
+   * @example Directly give the options to use
+   * ```javascript
+   * selectOptions: [
+   *   { value: '1', text: 'Rivoli' },
+   *   { value: '2', text: 'Austerlitz' },
+   *   { value: '3', text: 'Marengo', selected: true },
+   * ],
+   * ```
+   * @example Fetch the options with an HTTP request or any other function
+   * ```javascript
+   * // Change the keys used to lookup value and text
+   * selectOptionsValueKey: 'id',
+   * selectOptionsTextKey: 'title',
+   * // this promises to return an Array with objects that have the keys "id" and "title"
+   * selectOptions: Something.getOptions(),
+   * ```
+   */
   selectOptions?: Array<SelectOptions> | Promise<Array<SelectOptions>>;
   // What is the name of the key to use to lookup the values in the selectOptions array?
+  // @default value
   selectOptionsValueKey?: string;
   // What is the name of the key to use to lookup the option text in the selectOptions array?
+  // @default text
   selectOptionsTextKey?: string;
   // The text on the Submit button.
+  // @example Save changes
   submit?: string;
-  // The classes added to the submit button.
+  /**
+   * The classes added to the submit button.
+   * @example With bootstrap classes
+   * ```
+   * submitClasses: ['btn', 'btn-primary', 'mt-2'],
+   * ```
+   */
   submitClasses?: Array<string>;
   // The text added on hover of the malleable element. Uses the `title` attribute.
   tooltip?: string;
@@ -145,6 +220,7 @@ export class Malle {
       listenNow: false,
       listenOn: '[data-malleable="true"]',
       onBlur: Action.Submit,
+      onCancel: undefined,
       onEdit: undefined,
       onEnter: Action.Submit,
       onEscape: Action.Cancel,
@@ -230,6 +306,13 @@ export class Malle {
   cancel(event: Event): boolean {
     event.preventDefault();
     this.debug(event.toString());
+    // execute the before hook
+    if (typeof this.opt.onCancel === 'function') {
+      this.debug('running onCancel function');
+      if (this.opt.onCancel(this.original, event, this.input) !== true) {
+        return;
+      }
+    }
     this.debug('reverting to original element');
     this.form.replaceWith(this.original);
     return true;

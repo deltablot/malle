@@ -1,5 +1,9 @@
 # Changelog for malle
 
+## 2.6.0
+
+* Add `onCancel` option to give a function to run when a Cancel action is triggered. fix #13
+
 ## 2.5.2
 
 * Allow returning a `Promise<boolean>` with `onEdit`

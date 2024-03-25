@@ -66,6 +66,24 @@ new Malle({
 // instead of using listenNow, we call listen() right after instanciation
 }).listen();
 
+// onCancel
+new Malle({
+  fun: value => {
+    return new Promise(resolve => resolve(value));
+  },
+  formClasses: ['d-inline-flex'],
+  debug: true,
+  onCancel: () => {
+    console.log('a cancel action has been detected');
+    return true;
+  },
+  onBlur: Action.Cancel,
+  cancel: 'Cancel',
+  cancelClasses: ['btn', 'btn-danger'],
+  listenOn: '.onCancel',
+  listenNow: true,
+});
+
 new Malle({
   fun: value => {
     return new Promise(resolve => resolve(value));
