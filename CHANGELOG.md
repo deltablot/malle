@@ -1,5 +1,9 @@
 # Changelog for malle
 
+## 2.6.1
+
+* Upgrade devDependencies to address CVE-2024-4068. Note that this does not impact production code, given that this project has no direct dependencies.
+
 ## 2.6.0
 
 * Add `onCancel` option to give a function to run when a Cancel action is triggered. fix #13
