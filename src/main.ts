@@ -193,10 +193,12 @@ export class Malle {
   original: HTMLElement;
   input: HTMLInputElement|HTMLSelectElement;
   innerFun: string;
+  ignoreBlur: boolean;
 
   constructor(options: Options) {
     this.opt = this.normalizeOptions(options);
     this.debug(`Options: ${JSON.stringify(this.opt)}`);
+    this.ignoreBlur = false;
     if (this.opt.listenNow) {
       this.listen();
     }
@@ -321,6 +323,9 @@ export class Malle {
   }
 
   handleBlur(event: Event) {
+    if (this.ignoreBlur) {
+      return;
+    }
     // read behavior from options
     let blurAction: string = this.opt.onBlur;
     // and let element override it
@@ -334,6 +339,8 @@ export class Malle {
   }
 
   handleKeypress(event: KeyboardEvent): boolean {
+    // reset this global flag
+    this.ignoreBlur = false;
     // ignore it for textarea
     if (this.opt.inputType === InputType.Textarea) {
       return false;
@@ -350,6 +357,7 @@ export class Malle {
         return;
       }
       this[enterAction](event);
+      this.ignoreBlur = true;
       return;
     }
 
@@ -364,6 +372,7 @@ export class Malle {
         event.preventDefault();
         return;
       }
+      this.ignoreBlur = true;
       this[escAction](event);
     }
   }
