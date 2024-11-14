@@ -2,7 +2,8 @@
 
 ## 2.6.2
 
-*  bug/minor: events: ignore blur event after keypress has been handled. fix #11
+* bug/minor: events: ignore blur event after keypress has been handled. fix #11
+* upgrade devDependencies
 
 ## 2.6.1
 
