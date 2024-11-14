@@ -1,5 +1,9 @@
 # Changelog for malle
 
+## 2.6.2
+
+*  bug/minor: events: ignore blur event after keypress has been handled. fix #11
+
 ## 2.6.1
 
 * Upgrade devDependencies to address CVE-2024-4068. Note that this does not impact production code, given that this project has no direct dependencies.
