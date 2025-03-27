@@ -68,8 +68,8 @@ See the [API Documentation](https://deltablot.github.io/malle/api) for usage and
 
 ## Contributing
 
-See [contributing documentation](./CONTRIBUTING.md).
+See [contributing documentation](https://github.com/deltablot/malle/blob/master/CONTRIBUTING.md).
 
 ## License
 
-This software is open source and licensed under the [MIT License](./LICENSE).
+This software is open source and licensed under the [MIT License](https://github.com/deltablot/malle/blob/master/LICENSE).
