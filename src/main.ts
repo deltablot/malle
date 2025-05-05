@@ -254,6 +254,21 @@ export class Malle {
         el.addEventListener(this.opt.event, m.process.bind(m));
         // make the mouse change to pointer on targeted elements
         el.style.cursor = 'pointer';
+        // make it focusable by keyboard
+        if (!el.hasAttribute('tabindex')) {
+          el.setAttribute('tabindex', '0');
+        }
+        // announce it as a button to assistive tech
+        if (!el.hasAttribute('role')) {
+          el.setAttribute('role', 'button');
+        }
+        // keyboard activation for Enter & Space
+        el.addEventListener('keydown', (event: KeyboardEvent) => {
+          if (event.key === 'Enter' || event.key === ' ') {
+            m.process(event);
+            event.preventDefault();
+          }
+        });
         if (this.opt.tooltip) {
           el.title = this.opt.tooltip;
         }

@@ -1,5 +1,10 @@
 # Changelog for malle
 
+## 2.7.0
+
+* Allow focus of malleable elements with keyboard
+* Allow editing of malleable elements by pressing space or enter
+
 ## 2.6.2
 
 * bug/minor: events: ignore blur event after keypress has been handled. fix #11
