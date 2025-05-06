@@ -1,5 +1,9 @@
 # Changelog for malle
 
+## 2.7.1
+
+* Don't add `role="button"` to `button` elements
+
 ## 2.7.0
 
 * Allow focus of malleable elements with keyboard

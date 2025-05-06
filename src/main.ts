@@ -258,8 +258,8 @@ export class Malle {
         if (!el.hasAttribute('tabindex')) {
           el.setAttribute('tabindex', '0');
         }
-        // announce it as a button to assistive tech
-        if (!el.hasAttribute('role')) {
+        // announce it as a button to assistive tech, but not if it's a button element as it would be redudant
+        if (!el.hasAttribute('role') && el.nodeName !== 'BUTTON') {
           el.setAttribute('role', 'button');
         }
         // keyboard activation for Enter & Space
