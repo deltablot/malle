@@ -1,5 +1,9 @@
 # Changelog for malle
 
+## 2.7.2
+
+* bug/minor: avoid double event handle on Chromium. Fix #18 (#19)
+
 ## 2.7.1
 
 * Don't add `role="button"` to `button` elements
