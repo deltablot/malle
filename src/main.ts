@@ -306,6 +306,8 @@ export class Malle {
 
       if (this.original.innerText === newValue) {
         this.debug('original value is same as new value, reverting without calling fun');
+        // this must be set to avoid Chromium triggering blur listener too! See #18
+        this.ignoreBlur = true;
         this.form.replaceWith(this.original);
         return false;
       }
