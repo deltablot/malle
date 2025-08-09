@@ -5,6 +5,19 @@
  * https://github.com/deltablot/malle
  */
 
+// type for lazy loaders
+type Lazy<T> = T | Promise<T> | (() => T | Promise<T>);
+
+function isPromise<T>(v: unknown): v is Promise<T> {
+  return typeof v === 'object' && v !== null && 'then' in v &&
+    typeof (v as { then?: unknown }).then === 'function';
+}
+
+async function resolveLazy<T>(src: Lazy<T>): Promise<T> {
+  const value = typeof src === 'function' ? (src as () => T | Promise<T>)() : src;
+  return isPromise<T>(value) ? await value : value;
+}
+
 // The `InputType` will set the `type` attribute of the generated input element.
 export enum InputType {
   Color = 'color',
@@ -163,7 +176,7 @@ export interface Options {
    * selectOptions: Something.getOptions(),
    * ```
    */
-  selectOptions?: Array<SelectOptions> | Promise<Array<SelectOptions>>;
+  selectOptions?: Lazy<SelectOptions[]>;
   // What is the name of the key to use to lookup the values in the selectOptions array?
   // @default value
   selectOptionsValueKey?: string;
@@ -394,7 +407,7 @@ export class Malle {
     }
   }
 
-  getInput(): HTMLInputElement {
+  async getInput(): Promise<HTMLInputElement> {
     // create the input
     let inputElement = 'input';
     if (this.opt.inputType === InputType.Textarea) {
@@ -443,14 +456,13 @@ export class Malle {
 
     // add options for a select
     if (this.opt.inputType === InputType.Select) {
-      Promise.resolve(this.opt.selectOptions).then(o => {
-        o.forEach(o => {
-          const option = document.createElement('option');
-          option.value = o[this.opt.selectOptionsValueKey];
-          option[this.innerFun] = o[this.opt.selectOptionsTextKey];
-          option.selected = (o.selected ?? false) || this.original[this.innerFun] === o[this.opt.selectOptionsTextKey];
-          input.appendChild(option);
-        });
+      const opts = this.opt.selectOptions ? await resolveLazy(this.opt.selectOptions) : [];
+      opts.forEach(o => {
+        const option = document.createElement('option');
+        option.value = o[this.opt.selectOptionsValueKey];
+        option[this.innerFun] = o[this.opt.selectOptionsTextKey];
+        option.selected = (o.selected ?? false) || this.original[this.innerFun] === o[this.opt.selectOptionsTextKey];
+        input.appendChild(option);
       });
     }
     // listen on keypress for Enter/Escape keys. Note that Escape will only appear with keydown/keyup, not keypress event.
@@ -467,7 +479,7 @@ export class Malle {
   /**
    * Process the triggering event: replace target element with an input
    */
-  process(event: Event) {
+  async process(event: Event) {
     this.debug('Event triggered:');
     this.debug(event.toString());
 
@@ -488,7 +500,7 @@ export class Malle {
     this.opt.formClasses.forEach(cl => {
       form.classList.add(cl);
     });
-    const input = this.getInput();
+    const input = await this.getInput();
     form.appendChild(input);
 
     // now the submit/cancel buttons
