@@ -1,5 +1,9 @@
 # Changelog for malle
 
+## 2.8.0
+
+* feat: allow lazy loading selectOptions by giving it a function
+
 ## 2.7.2
 
 * bug/minor: avoid double event handle on Chromium. Fix #18 (#19)
