@@ -1,5 +1,10 @@
 # Changelog for malle
 
+## 2.8.1
+
+* ci: use OIDC auth for publishing trusted package
+* bump: upgrade dependencies
+
 ## 2.8.0
 
 * feat: allow lazy loading selectOptions by giving it a function
