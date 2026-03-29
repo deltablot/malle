@@ -1,5 +1,8 @@
 name: validate
 on: [push, pull_request]
+permissions:
+  id-token: write  # Required for OIDC
+  contents: read
 jobs:
   run-test:
     runs-on: ubuntu-latest
