@@ -7,7 +7,6 @@
   "repository": "https://github.com/deltablot/malle",
   "author": "Nicolas CARPi @ Deltablot>",
   "license": "MIT",
-  "private": false,
   "files": [
     "dist/*.js",
     "dist/*.js.map",
@@ -36,5 +35,8 @@
     "typedoc": "^0.28.16",
     "typescript": "^5.9.3",
     "typescript-eslint": "^8.57.2"
+  },
+  "dependencies": {
+    "@deltablot/malle": "^2.8.2"
   }
 }
