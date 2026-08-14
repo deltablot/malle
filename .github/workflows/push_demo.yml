@@ -43,10 +43,8 @@ jobs:
         run: npm run build
       - name: Build api doc
         run: npm run build-docs-demo
-      - name: Fix lib load path
-        run: sed -i -e 's:./dist::' demo/demo.js
       - name: Copy lib
-        run: cp dist/main.js demo/
+        run: mkdir -p demo/dist && cp dist/main.js demo/dist/
       - name: Setup Pages
         uses: actions/configure-pages@45bfe0192ca1faeb007ade9deae92b16b8254a0d # v6
       - name: Upload artifact
