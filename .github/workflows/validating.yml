@@ -1,24 +1,32 @@
 name: validate
+
 on: [push, pull_request]
+
 permissions:
-  id-token: write  # Required for OIDC
   contents: read
+
 jobs:
   run-test:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        node: [ '22', '24', '25' ]
+        node: [ '22', '24', '26' ]
     name: Node ${{ matrix.node }} test
     steps:
-      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6
+      # https://github.com/actions/checkout/releases/tag/v7.0.1
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        with:
+          persist-credentials: false
+
       - name: Setup node
-        uses: actions/setup-node@53b83947a5a98c8d113130e565377fae1a50d02f # v6
+      # https://github.com/actions/setup-node/releases/tag/v7.0.0
+        uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020
         with:
           node-version: ${{ matrix.node }}
-          cache: 'npm'
+          package-manager-cache: false
+
       - name: Install dependencies
-        run: npm ci
+        run: npm ci --ignore-scripts
       - name: Run linter
         run: npm run lint
       - name: Run build
