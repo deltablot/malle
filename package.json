@@ -14,7 +14,7 @@
     "dist/*.d.ts"
   ],
   "scripts": {
-    "build": "tsc && cp -v dist/main.js demo/malle.js",
+    "build": "tsc && mkdir -p demo && cp -v dist/main.js demo/malle.js",
     "watch-docs": "typedoc --commentStyle All --watch src/main.ts",
     "build-docs": "typedoc --commentStyle All src/main.ts",
     "build-docs-demo": "typedoc --commentStyle All --out demo/api src/main.ts",

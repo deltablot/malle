@@ -4,7 +4,7 @@
  * License MIT
  * https://github.com/deltablot/malle
  */
-const libPath = '../dist/main.js';
+const libPath = './dist/main.js';
 
 // use a dynamic named import here
 const { Action, InputType, Malle } = await import(libPath);
